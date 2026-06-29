@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://research-assistant-api-ups4.onrender.com/$1"
+    }
+  ]
+}
