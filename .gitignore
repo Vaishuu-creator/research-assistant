@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# ChromaDB local data
+backend/chroma_data/
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.DS_Store
