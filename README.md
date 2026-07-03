@@ -1,6 +1,6 @@
-# 🔬 Research Assistant
+# Research Assistant
 
-A production-grade multi-agent AI research assistant that searches the web, summarizes sources, and compiles structured reports with citations — in real time.
+A production grade multi-agent AI research assistant that searches the web, summarizes sources, and compiles structured reports with citations in real time.
 
 **Live demo:** [research-assistant-delta-six.vercel.app](https://research-assistant-delta-six.vercel.app)
 
@@ -12,9 +12,9 @@ A production-grade multi-agent AI research assistant that searches the web, summ
 
 Type any research question. Four AI agents coordinate to produce a structured report:
 
-1. **Web Search Agent** — queries the live web via Tavily API
-2. **Summarizer Agent** — extracts key insights from each source using GPT-4o-mini
-3. **Report Compiler Agent** — synthesizes everything into a markdown report with inline citations using GPT-4o
+1. **Web Search Agent** - queries the live web via Tavily API
+2. **Summarizer Agent** - extracts key insights from each source using GPT-4o-mini
+3. **Report Compiler Agent** - synthesizes everything into a markdown report with inline citations using GPT-4o
 4. Results stream back to the UI in real time via Server-Sent Events
 
 ---
@@ -39,7 +39,7 @@ Streamed response → React frontend
 
 ### Agent State
 
-All agents share a typed state object — a whiteboard every agent reads from and writes to:
+All agents share a typed state object - a whiteboard every agent reads from and writes to:
 
 ```python
 class ResearchState(TypedDict):
@@ -152,29 +152,28 @@ CORS_ORIGINS=["http://localhost:5173"]
 ## Key Design Decisions
 
 **Why LangGraph over plain LangChain?**
-The research pipeline needs conditional routing — if search returns no results, skip summarization entirely. LangGraph's StateGraph enables this with `add_conditional_edges`, making the pipeline resilient rather than brittle.
+The research pipeline needs conditional routing - if search returns no results, skip summarization entirely. LangGraph's StateGraph enables this with `add_conditional_edges`, making the pipeline resilient rather than brittle.
 
 **Why SSE over WebSockets?**
-Research takes 30–45 seconds. SSE streams agent progress events to the frontend so users see real-time feedback instead of a blank screen. SSE is simpler than WebSockets for one-directional server→client streaming.
+Research takes 30-45 seconds. SSE streams agent progress events to the frontend so users see real-time feedback instead of a blank screen. SSE is simpler than WebSockets for one-directional server→client streaming.
 
 **Why GPT-4o-mini for summaries and GPT-4o for reports?**
-Summarization is high-volume (one call per source) and doesn't require deep reasoning — GPT-4o-mini is 10x cheaper and fast enough. The final report is the user-facing output where quality matters most, so GPT-4o is justified there.
+Summarization is high-volume (one call per source) and doesn't require deep reasoning - GPT-4o-mini is 10x cheaper and fast enough. The final report is the user-facing output where quality matters most, so GPT-4o is justified there.
 
 **Why Redis caching?**
-Tavily costs money per search. Identical queries within 6 hours return cached results instantly — saving API costs and reducing latency significantly.
+Tavily costs money per search. Identical queries within 6 hours return cached results instantly - saving API costs and reducing latency significantly.
 
 ---
 
 ## Deployment
 
-- **Backend** — Render (Python 3 web service, free tier)
-- **Frontend** — Vercel (Vite, auto-deploy on push)
-- **Redis** — Render Key Value store (free tier)
-- **ChromaDB** — Embedded, persists on Render disk
+- **Backend** - Render (Python 3 web service, free tier)
+- **Frontend** - Vercel (Vite, auto-deploy on push)
+- **Redis** - Render Key Value store (free tier)
+- **ChromaDB** - Embedded, persists on Render disk
 
 ---
 
 ## Built by
 
-**Vaishali Murugesan** — Full Stack & AI Engineer  
-[GitHub](https://github.com/Vaishuu-creator) · [LinkedIn](https://linkedin.com/in/vaishalimurugesan/)
+**Vaishali Murugesan** 
